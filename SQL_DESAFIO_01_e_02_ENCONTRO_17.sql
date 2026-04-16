@@ -1,4 +1,8 @@
 
+-- CONSTRAINT ELIMINADA
+ALTER TABLE tb_vendas
+DROP CONSTRAINT tb_vendas_ibfk_1;
+
 -- ACESSANDO O BD
 USE DB_04017C_CEZAR_SILVA;
 
@@ -64,6 +68,30 @@ INSERT INTO tb_faixa_preco (id_faixa, descricao, preco_min, preco_max) VALUES
 
 
 -- RESPONDENDO AO NOSSO DESAFIO
+-- DESAFIO 01
+SELECT P.id_produto as ID,
+       P.nome as Produto,
+       sum(V.quantidade) as Qtde_Total
+FROM tb_produtos as P
+LEFT JOIN tb_vendas as V
+ON P.id_produto = V.id_produto
+GROUP BY P.id_produto, P.nome
+ORDER BY 3 DESC;
+
+-- DESAFIO 02
+SELECT P.nome AS Produto,
+       P.preco as Preco,
+       FP.descricao as Categoria
+ FROM tb_produtos AS P
+JOIN tb_faixa_preco AS FP
+ON P.preco BETWEEN FP.preco_min AND FP.preco_max
+ORDER BY 2 ASC;
+
+
+
+
+
+
 
 
 
